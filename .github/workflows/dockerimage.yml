@@ -10,11 +10,9 @@ jobs:
  
     steps:
     - uses: actions/checkout@v1
-      with:
-       repo-token: ${{secrets.GITHUB_TOKEN}}
 
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag docker.pkg.github.com/sujaypillai/buildxdemo/buildxdemo:githubactions
       
     - name: Push Docker image to Github package registry
-      run: docker push docker.pkg.github.com/sujaypillai/buildxdemo/buildxdemo:githubactions
+      run: docker push docker.pkg.github.com/sujaypillai/buildxdemo/buildxdemo:githubactions -u sujaypillai -p ${{secrets.GITHUB_TOKEN}}
