@@ -13,6 +13,9 @@ jobs:
 
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag docker.pkg.github.com/sujaypillai/buildxdemo/buildxdemo:githubactions
+    
+    - name: Log into registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
       
     - name: Push Docker image to Github package registry
-      run: docker push docker.pkg.github.com/sujaypillai/buildxdemo/buildxdemo:githubactions -u sujaypillai -p ${{secrets.GITHUB_TOKEN}}
+      run: docker push docker.pkg.github.com/sujaypillai/buildxdemo/buildxdemo:githubactions
